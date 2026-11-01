@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Dépenses</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4CAF50">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>💰 Mes Dépenses</h1>
+    <p class="sous-titre">Suivez vos dépenses quotidiennes</p>
+  </header>
+
+  <main>
+    <form id="form">
+      <input type="text" id="nom" placeholder="Nom de la dépense" required>
+      <div class="ligne">
+        <input type="number" id="montant" placeholder="Montant (DH)" required min="0" step="0.01">
+        <select id="categorie">
+          <option value="Nourriture">🍔 Nourriture</option>
+          <option value="Transport">🚌 Transport</option>
+          <option value="Loisirs">🎮 Loisirs</option>
+          <option value="Santé">💊 Santé</option>
+          <option value="Autre">📦 Autre</option>
+        </select>
+      </div>
+      <button type="submit">+ Ajouter</button>
+    </form>
+
+    <div class="resume">
+      <div class="carte">
+        <span class="label">Total</span>
+        <span class="valeur" id="total">0 DH</span>
+      </div>
+      <div class="carte">
+        <span class="label">Nombre</span>
+        <span class="valeur" id="nombre">0</span>
+      </div>
+    </div>
+
+    <button id="export" class="btn-export">📥 Exporter en CSV</button>
+
+    <div class="stats">
+      <h3>📊 Par catégorie</h3>
+      <div id="stats-list"></div>
+    </div>
+
+    <div class="filtres">
+      <button class="filtre actif" data-cat="Tous">Tous</button>
+      <button class="filtre" data-cat="Nourriture">🍔</button>
+      <button class="filtre" data-cat="Transport">🚌</button>
+      <button class="filtre" data-cat="Loisirs">🎮</button>
+      <button class="filtre" data-cat="Santé">💊</button>
+      <button class="filtre" data-cat="Autre">📦</button>
+    </div>
+
+    <ul id="liste"></ul>
+    <p id="vide" class="vide">Aucune dépense pour le moment.</p>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js');
+    }
+  </script>
+</body>
+</html>
